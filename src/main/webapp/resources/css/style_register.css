@@ -1,0 +1,38 @@
+body {
+    font-family: Verdana, Geneva, sans-serif;
+    font-size: 14px;
+    font-style: normal;
+    font-weight: normal;
+    background-color: #eaeaea;
+    margin: 80px;
+}
+
+.a1 {
+    background-color: #FFF;
+    width: 1300px;
+    height: 1000px;
+    margin: 0 auto;
+    padding: 20px;
+}
+
+
+.title {
+    color: #000;
+    text-align:center;
+    font-size:20px;
+    font-weight:bold;
+}
+
+.login_div{
+    background-color: darkseagreen;
+    width:500px;
+    border: 1px solid #eaeaea;
+    margin: 0 auto;
+    padding:10px;
+
+}
+
+.text{
+    text-align: right;
+
+}

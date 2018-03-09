@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<beans:beans xmlns="http://www.springframework.org/schema/security"
+             xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+             xmlns:beans="http://www.springframework.org/schema/beans"
+             xsi:schemaLocation="
+                                http://www.springframework.org/schema/security
+                                http://www.springframework.org/schema/security/spring-security-4.2.xsd
+                                http://www.springframework.org/schema/beans
+                                http://www.springframework.org/schema/beans/spring-beans-4.2.xsd">
+
+
+        <beans:bean id="encoder"
+                    class="org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder">
+            <beans:constructor-arg name="strength" value="11"/>
+        </beans:bean>
+
+        <beans:bean id="userDetailsServiceImpl" class="bank.services.implementations.UserDetailsServiceImpl">
+        </beans:bean>
+
+        <http auto-config="true">
+            <intercept-url pattern="/" access="hasAnyRole('ROlE_USER','ROLE_ADMIN')"/>
+            <intercept-url pattern="/welcome" access="hasAnyRole('ROlE_USER','ROLE_ADMIN')"/>
+            <intercept-url pattern="/admin" access="hasRole('ROLE_ADMIN')"/>
+            <form-login
+                    login-page="/login"
+                    default-target-url="/admin"
+                    authentication-failure-url="/login?error"
+                    username-parameter="login"
+                    password-parameter="password"/>
+            <logout logout-success-url="/login?logout"/>
+        </http>
+
+        <authentication-manager alias="authenticationManager">
+            <authentication-provider user-service-ref="userDetailsServiceImpl">
+
+                <password-encoder ref="encoder"></password-encoder>
+            </authentication-provider>
+        </authentication-manager>
+
+</beans:beans>
